@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class SearchBar extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             year:"year",
             genre:"genre",
             title:"title",
             search_val:'',
-            selectedValue:''
+            selectedValue:'',
+            
         }
+        this.updateVal = this.updateVal.bind(this);
     }
 
     // updateVal(event){
@@ -17,22 +20,38 @@ export default class SearchBar extends Component {
     // }
     setValue(event){
         this.setState({
-            selectedValue:event.target.value,
-            
+            selectedValue:event.target.value    
         })
     }
 
     updateVal(event){
+        //console.log('props', this.props);
         this.setState({
             search_val:event.target.value
-        })          
-
-        axios.get(`http://127.0.0.1:8000/api/searchmovies/${this.state.search_val}`)
-        .then(response=>{
-            
+        },()=>{
+        axios.get('http://127.0.0.1:8000/api/searchmovies', {
+            params: {
+            selectedValue:this.state.selectedValue,
+            search_val1:this.state.search_val
+            }
         })
-        
+        .then((response) => {
+            //console.log('props 2', this.props);
+            this.props.updateList(response.data);
+            //console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        }); 
+    })
+
+
     }
+
+    
 
     render() {
         return (

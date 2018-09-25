@@ -5,11 +5,26 @@ import MovieList from './MovieList';
 
 
 export default class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            movies:[]
+        }
+    }
+    
+    updateMovies(result){
+        this.setState({
+            movies:result
+        });
+        //console.log(this.state.movies);
+    };
+
+
     render() {
         return (
             <div>
-               <SearchBar/> 
-               <MovieList/>
+               <SearchBar updateList={(result)=>{this.updateMovies(result)}}/> 
+               <MovieList movie_list1={this.state.movies} />
             </div>
         );
     }

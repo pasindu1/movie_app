@@ -49,7 +49,12 @@ class Moviecontroller extends Controller
     $movie->save();
    }
 
-   public function searchmovie(){
-       
+   public function searchmovie(Request $request){
+    $selectedVal = $request->selectedValue;
+    $searchVal =(string) $request->search_val1;
+    //dd($request->selectedValue);
+
+    $result = MovieDetail::where($selectedVal, 'like',  $searchVal . '%')->get();
+    return $result;
    }
 };
