@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\MovieDetail;
+use App\Rate;
 
 class Moviecontroller extends Controller
 {
@@ -17,6 +18,12 @@ class Moviecontroller extends Controller
        $moviedetail->rate = "0";
        $moviedetail->category_id = $request->genre;
        $moviedetail->save();
+       $rate = new Rate;
+       $rate->clicks = 0;
+       $rate->value = 0;
+       $rate->movie_id = $moviedetail->id;       
+       $rate->save();
+
    return  $request-> all();
    }
 
@@ -51,10 +58,28 @@ class Moviecontroller extends Controller
 
    public function searchmovie(Request $request){
     $selectedVal = $request->selectedValue;
-    $searchVal =(string) $request->search_val1;
+    $searchVal = $request->search_val1;
     //dd($request->selectedValue);
 
     $result = MovieDetail::where($selectedVal, 'like',  $searchVal . '%')->get();
     return $result;
+   }
+   public function getrate(Request $request){
+       //dd($request->params);
+       $movie_id = $request->params["movie_id"];
+       $rateval = $request->params["rateVal"];
+       $result = Rate::where('movie_id', '=',$movie_id)->get();
+       $clicks = $result[0]->clicks;
+       $value = $result[0]->value;
+       $result[0]->clicks = $clicks + 1;
+       $result[0]->value = $rateval+$value;
+       $result[0]->save();
+       //updating the rate in movie
+       $movie = MovieDetail::find($movie_id); 
+       $movie->rate = ($result[0]->value)/($result[0]->clicks);
+       $movie->save(); 
+       return $movie;
+
+       
    }
 };

@@ -120,7 +120,7 @@ export default class AddMovie extends Component {
                 <input value={this.state.image} type="file" className="form-control" id="image" />
             </div> */}
             <br/>
-            <button  type="submit" className="btn btn-primary">Submit</button>
+                <button  type="submit" className="btn btn-primary">Submit</button>
             </form>
 
             </div>

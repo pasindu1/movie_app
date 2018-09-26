@@ -15,8 +15,7 @@ export default class Home extends Component {
     updateMovies(result){
         this.setState({
             movies:result
-        });
-        //console.log(this.state.movies);
+        });        
     };
 
 
@@ -25,6 +24,7 @@ export default class Home extends Component {
             <div>
                <SearchBar updateList={(result)=>{this.updateMovies(result)}}/> 
                <MovieList movie_list1={this.state.movies} />
+               
             </div>
         );
     }

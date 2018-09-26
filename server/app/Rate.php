@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MovieDetail extends Model
+class Rate extends Model
 {
     protected $fillable = ['id'];
 }

@@ -38,7 +38,7 @@ export default class SearchBar extends Component {
         .then((response) => {
             //console.log('props 2', this.props);
             this.props.updateList(response.data);
-            //console.log(response.data);
+            console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);
