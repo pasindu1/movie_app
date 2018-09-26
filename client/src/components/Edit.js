@@ -10,7 +10,7 @@ export default class Edit extends Component {
             title:'',
             desc:'',
             year:'',
-            genre:'',
+            genre:0,
             categories:[],
             moviedetail:[]
               
@@ -35,7 +35,11 @@ export default class Edit extends Component {
             });
         }
 
-
+        setgenre(event){
+        this.setState({
+           genre: event.target.value
+            });
+        }
 
         componentDidMount(){
         axios.get('http://127.0.0.1:8000/api/getmovies/edit/'+this.props.match.params.id)
@@ -47,6 +51,13 @@ export default class Edit extends Component {
                 
                 });
             });
+
+        axios.get('http://127.0.0.1:8000/api/getCategory')
+        .then(response => {
+            this.setState({
+                categories:response.data
+            })
+        });
         }
 
     storedata(event){
@@ -54,7 +65,8 @@ export default class Edit extends Component {
         const moviedetails = {
             title: this.state.title,
             desc: this.state.desc,
-            year:this.state.year
+            year:this.state.year,
+            genre:this.state.genre
         }
 
         axios.put('http://127.0.0.1:8000/api/getmovies/update/'+this.props.match.params.id,moviedetails)
@@ -84,7 +96,14 @@ export default class Edit extends Component {
             
             <label className="mr-sm-2" >Genre</label>
             <select  onChange={(event)=>{this.setgenre(event)}}   className="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">     
-                <option value="choose.."></option>        
+                <option value="Choose the genre" >Chose the Genre</option>
+                {
+                    this.state.categories.map((category,i) => {
+                        return(
+                            <option key={i} value={category.id}>{category.cate_name}</option>        
+                        )
+                    })
+                }        
             </select>
             <br/>
   

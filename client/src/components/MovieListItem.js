@@ -9,7 +9,7 @@ export default class MovieListItem extends Component {
     constructor(props){
         super(props);
         this.state={
-         rating :0  
+         rating :0,  
         }
     }
 

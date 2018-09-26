@@ -53,6 +53,7 @@ class Moviecontroller extends Controller
     $movie->title = $request->title;
     $movie->desc = $request->desc;
     $movie->year = $request->year;
+    $movie->category_id = $request->genre;
     $movie->save();
    }
 
@@ -80,4 +81,5 @@ class Moviecontroller extends Controller
        $movie->save(); 
        return $movie;      
    }
+
 };

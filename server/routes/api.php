@@ -30,3 +30,4 @@ Route::get('/getmovies/edit/{id}','Moviecontroller@editmovie');
 Route::put('/getmovies/update/{id}', 'Moviecontroller@updatemovie');
 Route::get('/searchmovies','Moviecontroller@searchmovie');
 Route::put('/getrates','Moviecontroller@getrate');
+Route::get('/getRate','Moviecontroller@getinitialrate');
