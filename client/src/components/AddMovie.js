@@ -103,7 +103,7 @@ export default class AddMovie extends Component {
             
             <label className="mr-sm-2" >Genre</label>
             <select  onChange={(event)=>{this.setgenre(event)}}   className="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                
+                <option value="Choose the genre" >Chhose the Genre</option>
                 {
                     this.state.categories.map((category,i) => {
                         return(

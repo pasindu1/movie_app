@@ -33,7 +33,7 @@ class Moviecontroller extends Controller
    }
 
    public function getmovieslist(){
-    $result = MovieDetail::all();
+    $result = MovieDetail::orderBy('rate','desc')->get();
     return $result;
    }
 
@@ -78,8 +78,6 @@ class Moviecontroller extends Controller
        $movie = MovieDetail::find($movie_id); 
        $movie->rate = ($result[0]->value)/($result[0]->clicks);
        $movie->save(); 
-       return $movie;
-
-       
+       return $movie;      
    }
 };
