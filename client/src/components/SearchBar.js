@@ -6,7 +6,7 @@ export default class SearchBar extends Component {
         super(props);
         this.state={
             year:"year",
-            genre:"genre",
+            genre:"cate_name",
             title:"title",
             search_val:'',
             selectedValue:'',
@@ -26,6 +26,7 @@ export default class SearchBar extends Component {
 
     updateVal(event){
         //console.log('props', this.props);
+        event.preventDefault();
         this.setState({
             search_val:event.target.value
         },()=>{
@@ -47,6 +48,8 @@ export default class SearchBar extends Component {
             // always executed
         }); 
     })
+
+
 
 
     }

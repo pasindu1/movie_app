@@ -62,9 +62,10 @@ class Moviecontroller extends Controller
     $searchVal = $request->search_val1;
     //dd($request->selectedValue);
 
-    $result = MovieDetail::where($selectedVal, 'like',  $searchVal . '%')->get();
+    $result = MovieDetail::join('categories', 'movie_details.category_id', '=', 'categories.id')->where($selectedVal, 'like',  $searchVal . '%')->get();
     return $result;
    }
+   
    public function getrate(Request $request){
        //dd($request->params);
        $movie_id = $request->params["movie_id"];

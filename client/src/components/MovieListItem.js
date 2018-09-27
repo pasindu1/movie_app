@@ -9,9 +9,11 @@ export default class MovieListItem extends Component {
     constructor(props){
         super(props);
         this.state={
-         rating :0,  
+            movie_list:[],
+            selectedMovie:[]
         }
     }
+
 
     onDelete(category_id){
     axios.delete('http://127.0.0.1:8000/api/getmovies/delete/'+category_id)
@@ -25,13 +27,13 @@ export default class MovieListItem extends Component {
         const val = event
         axios.put('http://127.0.0.1:8000/api/getrates',{
             params: {
-            movie_id:id,
-            rateVal :event
+                movie_id:id,
+                rateVal :event
             }
         })
         .then(response => {
             this.setState({
-                rating:response.data.rate
+
             })
         });
 
@@ -47,7 +49,7 @@ export default class MovieListItem extends Component {
                     this.props.movie_list1.map((movie,i)=>{
                     return(
                         <li className="list1 list-group-item bg-light text-dark">
-                            {movie.title} {movie.year} film.. This is a {movie.desc}  IDMB Rating : {_.round(_.parseInt(movie.rate),2)}  
+                            {movie.title} {movie.year} film.. This is a {movie.desc}  IDMB Rating : {_.round(movie.rate,2)}  
                             <br/>
                             <a href="" className="btn btn-primary mt-4" >View</a>
                             <a href="" className="btn btn-danger mt-4" onClick={this.onDelete.bind(this,movie.id)}> Delete</a>
